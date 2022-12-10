@@ -64,10 +64,7 @@ CREATE TABLE `sales` (
 
 INSERT INTO `sales` (`DATE`, `INVOICE`, `LOCATION`, `CUSTOMER_NAME`, `AMOUNT`, `SALES_RTN`, `PAYMENT`, `SURPLUS`, `CF_INVOICE`) VALUES
 ('0000-00-00', 14000, 'KIL', 'XXXX', 0.00, 0.00, 0.00, 0.00, NULL),
-('2022-12-10', 14001, 'KIL', 'SUSAN', 90000.00, 0.00, 0.00, 700.00, NULL),
-('0000-00-00', 16000, 'MUL', 'XXXX', 0.00, 0.00, 0.00, 0.00, NULL),
-('2022-12-10', 16001, 'MUL', 'JOHN', 13500.00, 0.00, 10000.00, 0.00, NULL),
-('2022-12-10', 16002, 'MUL', 'SUSAN', 9300.00, 0.00, 10000.00, 0.00, '14001');
+('0000-00-00', 16000, 'MUL', 'XXXX', 0.00, 0.00, 0.00, 0.00, NULL);
 
 -- --------------------------------------------------------
 
@@ -81,13 +78,6 @@ CREATE TABLE `users` (
   `hash` text NOT NULL,
   `email` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`ID`, `username`, `hash`, `email`) VALUES
-(6, 'tharanees', 'pbkdf2:sha256:260000$A0nGe1h0YNEDjHPZ$47488d4887f9eb96a1ca123c23807f7f76000c3f86353a10cd528086262a48d0', 'tharaneesjasotharan@gmail.com');
 
 --
 -- Indexes for dumped tables
