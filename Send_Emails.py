@@ -9,12 +9,12 @@ def Send_email():
     OTP = generateOTP()
     otp = "YOUR OTP IS "+str(OTP)
     msg = (otp + ".\n" +"This is an auto-generated sms.\n"+"Sincerely Sivaguru Hardware Team.")
-    number= "+447759500535"
-    account_sid = "AC8ca18366c8cd6c7afc4a740fe596cbfc"
-    auth_token = "5d606694a69b87390fb5b878ce96484a"
+    number= "REPLACE WITH ADMIN'S PHONE NUMBER TO WHICH OTP WILL BE SENT"
+    account_sid = "FILL IN TWILIO ACCOUNT SID"
+    auth_token = "FILL IN TWILIO ACCOUNT AUTH_TOKEN"
     client = Client(account_sid,auth_token)
     message = client.messages.create(
-							  from_= "+16506403506",
+							  from_= "FILL IN TWILIO ACCOUNT PHONE NUMBER",
 							  body = msg,
 							  to = number
                         )
