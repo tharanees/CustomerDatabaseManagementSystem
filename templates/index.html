@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Summary
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th style="text-align:left">Name</th>
+                <th style="text-align:right">Receivable</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+                <tr>
+                    <td style="text-align:left">{{ row[0] }}</td>
+                    <td style="text-align:right">{{ (row[1]) | lkr }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr class="bg-danger">
+                <th style="text-align:left">TOTAL</th>
+                <th style="text-align:right">{{ total | lkr }}</th>
+                
+            </tr>
+        </tfoot>
+    </table>
+    <button type="button" class="btn btn-outline-primary" onclick="window.print()">PRINT</button>
+{% endblock %}

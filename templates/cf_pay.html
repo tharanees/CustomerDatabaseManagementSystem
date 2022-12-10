@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Carry Forward
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <div class="alert alert-success" role="alert">
+                {% for row in excess %}
+                    DATE: {{ row[0].strftime('%d/%m/%Y') }}
+                    {{ row[3] }} {{ row[2] }}
+                    INVOICE: {{ row[1] }}
+                    AMOUNT: {{ row[4] | lkr }}
+                    EXCESS: {{ (row[6] + row[7] - row[4]) | lkr }}
+                {% endfor %}
+            </div>
+        </thead>
+        <thead>
+            <tr>
+                <th>DATE</th>
+                <th>LOCATION</th>
+                <th>NAME</th>
+                <th>INVOICE</th>
+                <th>AMOUNT</th>
+                <th>SELECT</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in excess %}
+                {% for row in credit %}
+                    <tr>
+                        <td>{{ row[0].strftime('%d/%m/%Y') }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td>{{ row[3] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ (row[4] -row[6] - row[7]) | lkr }}</td>
+                        <td>
+                            <form action="/cf_pay" method="post">
+                                <input name ="customer_name" type ="hidden" value = {{r[3]}}>
+                                <input name="excess_invoice" type="hidden" value= {{r[1]}}>
+                                <input name="excess_amount" type="hidden" value={{(r[6]+r[7]-r[4])}}>
+                                <input name="credit_invoice" type="hidden" value={{row[1]}}>
+                                <button class="btn btn-sm btn-success" type="submit">Select</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

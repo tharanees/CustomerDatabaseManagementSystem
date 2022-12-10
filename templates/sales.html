@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sales
+{% endblock %}
+
+{% block main %}
+    <form action="/sales" method="post">
+        <div class="form-group">
+            <select class="form-control js-example-basic-single" name="customer_name" required>
+                <option value="" disabled selected hidden>Selct Customer</option>
+                {% for customer in customerList %}
+                    <option value ={{customer[0]}}>{{ customer[0] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="location" id="KIL" value="KIL" onclick="kil(this,{{ kilInvoice }})" required>
+          <label class="form-check-label" for="KIL">
+            Kilinochchi
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="location" id="MUL" value="MUL" onclick="mul(this,{{ mulInvoice }})" required>
+          <label class="form-check-label" for="MUL">
+            Mullaithivu
+          </label>
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" class="form-control" name ="invoice" id ="invoice_1" placeholder="Invoice" type="number" min="10000" max="99999" readonly required>
+        </div>
+        <div  class="form-group">
+            <input autocomplete="off"  class="mytext" style="padding: 5px; margin-right:10px; margin-bottom:10px; float: left" name="bags" id="bags" min ="1" placeholder="Bags" type="number" onKeyUp="multiply()" required>
+        </div>
+        <div class="form-group">
+            <input autocomplete="off"  class="mytext" style="padding: 5px; margin-right:10px; margin-bottom:10px; float: left" name="unit_price" id="unit_price" placeholder="Unit Price" min="0.01" step="0.01" type="number" onKeyUp="multiply()" required>
+        </div>
+        <button class="btn btn-success" type="submit" formaction="/add_item" style="margin-right:10px; margin-bottom:10px; float: left">Add Item</button>
+        <div class="form-group">
+            <input autocomplete="off" class="form-control" id ="amount" name="amount" placeholder="Amount" type="number" readonly required>
+        </div>
+        <script>
+          function multiply()
+          {
+              // Get the input values
+              let a = Number(document.getElementById('bags').value);
+              let b = Number(document.getElementById('unit_price').value);
+
+              // Do the multiplication
+              let c = a*b;
+
+              // Set the value of the total
+              document.getElementById('amount').value=c;
+          }
+          function kil(termsCheckBox,x){
+            if (termsCheckBox.checked) {
+                document.getElementById("invoice_1").value =x;
+            }
+          }
+          function mul(termsCheckBox,y){
+            if (termsCheckBox.checked) {
+                document.getElementById("invoice_1").value =y;
+            }
+          }
+          // In your Javascript (external .js resource or <script> tag)
+          $(document).ready(function() {
+              $('.js-example-basic-single').select2();
+
+          });
+        </script>
+        <button class="btn btn-danger" type="submit">Submit</button>
+    </form>
+{% endblock %}
